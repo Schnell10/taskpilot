@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
-import Login from './components/login/Login'
-import Home from './pages/Home'
+import Home from './pages/home/Home'
+import Login from './pages/login/Login'
 import './styles/styles.scss'
 
 const App = () => {
