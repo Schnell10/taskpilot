@@ -1,14 +1,16 @@
 const express = require('express')
 const helmet = require('helmet')
 
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const authRoutes = require('./routes/auth')
+const taskRoutes = require('./routes/tasks')
 
-const mongoDbUrl = 'mongodb+srv://schnell10:24041995ps@clustertaskpilot.oox8ecu.mongodb.net/?retryWrites=true&w=majority'
+//On récupére le mdp mongoDb du fichier .env
+const mongoDbPassword = process.env.mongoDbPassword
 
 //On connecte notre serveur à mongoDB
 mongoose
-   .connect(mongoDbUrl)
+   .connect(mongoDbPassword)
    .then(() => console.log('Connexion à MongoDB réussie !'))
    .catch(() => console.log('Connexion à MongoDB échouée !'))
 
@@ -33,14 +35,12 @@ app.use((req, res, next) => {
    next()
 })
 
-//routes
-
-
-//middleware pour analyser le contenu JSON des requêtes
+// Utilisation d'express.json() au lieu de bodyParser
 //(extrait les données JSON de la demande entrante et les rend disponibles dans un format JavaScript)
-app.use(bodyParser.json())
+app.use(express.json())
 
-
-
+//routes
+app.use('/api/auth', authRoutes)
+app.use('/api/task', taskRoutes)
 
 module.exports = app

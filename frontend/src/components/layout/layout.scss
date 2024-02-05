@@ -4,10 +4,34 @@
    min-height: 100vh;
 
    header {
-      background-color: #333;
+      background-color: #96c2db;
       color: white;
       text-align: center;
       padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 30px;
+
+      h1 {
+         font-size: 40px;
+         color: #ffffff;
+      }
+
+      button {
+         border: none;
+         background-color: #96c2db;
+         color: #ffffff;
+         font-size: 22px;
+         font-weight: bold;
+         font-family: 'Arial', sans-serif;
+         transition: text-shadow 0.3s ease;
+
+         &:hover {
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+         }
+      }
    }
 
    .main-content {
@@ -16,8 +40,8 @@
    }
 
    footer {
-      background-color: #333;
-      color: white;
+      background-color: #96c2db;
+      color: #ffffff;
       text-align: center;
       padding: 10px 0;
    }

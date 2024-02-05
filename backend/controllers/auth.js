@@ -33,16 +33,14 @@ exports.login = (req, res, next) => {
          if (!user) {
             return res
                .status(401)
-               .json({ message: 'Paire login/mot de passe incorrecte' })
+               .json({ message: '"Email not found in the database"' })
          }
          //On se sert de bcrypt pour comparer le mdp de la requête avec le mdp hashé dans la base de donnée
          bcrypt
             .compare(req.body.password, user.password)
             .then((valid) => {
                if (!valid) {
-                  return res
-                     .status(401)
-                     .json({ message: 'Paire login/mot de passe incorrecte' })
+                  return res.status(401).json({ message: 'Incorrect password' })
                }
                res.status(200).json({
                   //On renvoit l'identifiant de l'utilisateur et le JWT

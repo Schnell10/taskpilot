@@ -1,7 +1,6 @@
 const validator = require('@hapi/address')
 
 module.exports = (req, res, next) => {
-   // On vérifie que l'email et le mdp sont complétés
    if (!req.body.email || !req.body.password) {
       return res.status(400).json({ message: 'Champs incomplets' })
    }
