@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.gallery {
+   grid-column-gap: 20px;
+   grid-row-gap: 20px;
+   background-color: $grey-color;
+   border-radius: 25px;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   margin: 30px 70px;
+   padding: 20px;
+
+   figure {
+      transition: transform 300ms;
+   }
+
+   figure:hover {
+      transform: scale(1.01);
+   }
+}

@@ -1,11 +1,12 @@
+@import '../../styles/variables.scss';
+
 .app-container {
    display: flex;
    flex-direction: column;
    min-height: 100vh;
 
    header {
-      background-color: #96c2db;
-      color: white;
+      background-color: $main-color;
       text-align: center;
       padding: 20px 0;
       display: flex;
@@ -15,13 +16,13 @@
 
       h1 {
          font-size: 40px;
-         color: #ffffff;
+         color: $white-color;
       }
 
       button {
          border: none;
          background-color: #96c2db;
-         color: #ffffff;
+         color: $white-color;
          font-size: 22px;
          font-weight: bold;
          font-family: 'Arial', sans-serif;
@@ -40,8 +41,8 @@
    }
 
    footer {
-      background-color: #96c2db;
-      color: #ffffff;
+      background-color: $main-color;
+      color: $white-color;
       text-align: center;
       padding: 10px 0;
    }

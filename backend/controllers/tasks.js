@@ -55,3 +55,18 @@ exports.modifyDo = (req, res, next) => {
          res.status(500).json({ error })
       })
 }
+
+exports.deleteTask = (req, res, next) => {
+   Task.deleteOne({ _id: req.params.id }) //Puis on supprime l'objet de la base de donnée
+      .then((result) => {
+         if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'Tâche non trouvée' })
+         } else {
+            res.status(200).json({ message: 'Tâche supprimée !' })
+         }
+      })
+      .catch((error) => {
+         console.error('Error deleting task:', error)
+         res.status(500).json({ error })
+      })
+}

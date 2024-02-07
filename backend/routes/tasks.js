@@ -9,4 +9,6 @@ router.get('/', taskControllers.getAllTasks)
 
 router.put('/:id', taskControllers.modifyDo)
 
+router.delete('/:id', taskControllers.deleteTask)
+
 module.exports = router

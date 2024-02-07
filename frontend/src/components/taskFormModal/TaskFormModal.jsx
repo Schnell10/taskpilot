@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import './taskFormModal.scss'
 
-const TaskFormModal = () => {
+const TaskFormModal = ({ onTaskAdded }) => {
    const [showModal, setShowModal] = useState(false)
    const [taskData, setTaskData] = useState({
       taskName: '',
-      dueDate: '',
       category: '',
       description: '',
    })
@@ -18,35 +17,31 @@ const TaskFormModal = () => {
       }))
    }
 
-   const isFormValid =
-      taskData.taskName !== '' &&
-      taskData.dueDate !== '' &&
-      taskData.category !== ''
+   const isFormValid = taskData.taskName !== '' && taskData.category !== ''
 
    const handleFormSubmit = async (e) => {
       e.preventDefault()
       try {
          if (isFormValid) {
-            // Formatez la date ici avant de l'envoyer
-            const formattedDueDate = new Date(taskData.dueDate).toISOString()
-
             const response = await fetch('http://localhost:3000/api/task', {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
                },
-               body: JSON.stringify({ ...taskData, dueDate: formattedDueDate }),
+               body: JSON.stringify({
+                  ...taskData,
+               }),
             })
 
             if (response.ok) {
                setTaskData({
                   taskName: '',
-                  dueDate: '',
                   category: '',
                   description: '',
                })
 
                setShowModal(false)
+               onTaskAdded()
             } else {
                const errorResponse = await response.json()
                console.error(
@@ -73,39 +68,34 @@ const TaskFormModal = () => {
                   </span>
                   <h2>Add Task</h2>
                   <form onSubmit={handleFormSubmit}>
-                     <label>
+                     <label htmlFor="taskName">
                         Task Name:
                         <input
                            type="text"
                            name="taskName"
                            value={taskData.taskName}
                            onChange={handleInputChange}
+                           id="taskName"
                         />
                      </label>
-                     <label>
-                        Due Date:
-                        <input
-                           type="date"
-                           name="dueDate"
-                           value={taskData.dueDate}
-                           onChange={handleInputChange}
-                        />
-                     </label>
-                     <label>
+                     <label htmlFor="category">
                         Category:
                         <input
                            type="text"
                            name="category"
                            value={taskData.category}
                            onChange={handleInputChange}
+                           id="category"
                         />
                      </label>
-                     <label>
+                     <label htmlFor="description">
                         Description:
                         <textarea
                            name="description"
                            value={taskData.description}
                            onChange={handleInputChange}
+                           id="description"
+                           maxlength="100"
                         />
                      </label>
                      <button type="submit" disabled={!isFormValid}>

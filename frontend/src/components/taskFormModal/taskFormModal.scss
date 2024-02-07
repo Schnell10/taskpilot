@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .modal-overlay {
    position: fixed;
    top: 0;
@@ -11,7 +13,7 @@
    z-index: 1000;
 
    .modal {
-      background: #fff;
+      background: $grey-color;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -35,22 +37,25 @@
          }
 
          .error {
-            color: red;
+            color: $red-color;
             font-size: 12px;
             margin-top: 5px;
          }
       }
 
       button {
-         background: #007bff;
-         color: #fff;
+         background: $main-color;
+         color: $white-color;
          padding: 10px;
          border: none;
          border-radius: 4px;
          cursor: pointer;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
          &:disabled {
-            background-color: #ddd;
+            background-color: $white-color;
             cursor: not-allowed;
+            color: $text-color;
          }
       }
 
