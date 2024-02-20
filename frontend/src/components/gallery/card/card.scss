@@ -15,26 +15,38 @@
    padding-bottom: 20px;
 
    button {
+      border: none;
+      background-color: inherit;
+   }
+
+   .modify-delet {
       position: absolute;
       top: 0;
       right: 0;
       padding: 5px;
-      border: none;
       opacity: 0;
       transition: opacity 0.3s ease-out;
-      background-color: inherit;
+      display: flex;
+      gap: 7px;
 
-      .fa-trash {
+      &:hover {
+         cursor: pointer;
+      }
+
+      .fa-trash,
+      .fa-pen {
          font-size: 16px;
          transition: color 0.3s ease-out, transform 0.3s ease-out;
       }
    }
 
    &:hover {
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      button {
+      box-shadow: 0 1px 16px rgba(0, 0, 0, 0.1);
+
+      .modify-delet {
          opacity: 1;
-         .fa-trash:hover {
+         .fa-trash:hover,
+         .fa-pen:hover {
             color: $red-color; // Couleur rouge plus foncée au survol
             transform: scale(1.1); // Faire grossir l'icône au survol
          }
@@ -56,8 +68,28 @@
       justify-content: space-around;
       font-weight: 700;
       opacity: 0.9;
-      .category {
+      .Private {
          font-style: italic;
+         padding: 5px;
+         color: $white-color;
+         background-color: $blue-color;
+         border-radius: 4px;
+      }
+
+      .Work {
+         font-style: italic;
+         padding: 5px;
+         color: $white-color;
+         background-color: $red-color;
+         border-radius: 4px;
+      }
+
+      .School {
+         font-style: italic;
+         padding: 5px;
+         color: $white-color;
+         background-color: $green-color;
+         border-radius: 4px;
       }
 
       .date {
@@ -74,7 +106,7 @@
       justify-content: center;
    }
 
-   label {
+   .label-checkbox {
       position: absolute;
       bottom: 0;
       right: 5px;
@@ -82,5 +114,18 @@
       align-items: center;
       gap: 5px;
       font-size: 12px;
+
+      input:hover {
+         cursor: pointer;
+      }
+   }
+}
+
+.card-modal-open {
+   .modify-delet {
+      opacity: 1;
+      .modal-overlay {
+         background: rgba(0, 0, 0, 0.2);
+      }
    }
 }

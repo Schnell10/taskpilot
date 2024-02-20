@@ -1,5 +1,20 @@
 @import '../../styles/variables.scss';
 
+.add-task {
+   width: 80px;
+   border-radius: 2px;
+   border: 1px solid $main-color;
+
+   &:hover {
+      background-color: $main-color;
+      color: $white-color;
+   }
+}
+
+.modify-task {
+   display: block;
+}
+
 .modal-overlay {
    position: fixed;
    top: 0;
@@ -40,6 +55,14 @@
             color: $red-color;
             font-size: 12px;
             margin-top: 5px;
+         }
+
+         select {
+            margin-left: 15px;
+
+            &:hover {
+               cursor: pointer;
+            }
          }
       }
 

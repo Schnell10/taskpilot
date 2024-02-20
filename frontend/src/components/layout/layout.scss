@@ -42,8 +42,11 @@
 
    footer {
       background-color: $main-color;
-      color: $white-color;
       text-align: center;
       padding: 10px 0;
+
+      p {
+         color: $white-color;
+      }
    }
 }

@@ -1,8 +1,32 @@
+@import '../../styles/variables.scss';
+
 .home-page {
    padding: 20px;
    text-align: center;
 
-   h2 {
-      font-weight: bold;
+   .title-filter {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      margin: 0 30px;
+
+      h2 {
+         font-weight: bold;
+      }
+
+      .button-add-task button {
+         background-color: $grey-color;
+         color: $text-color;
+         padding: 4px;
+         border: 1px solid $main-color;
+         border-radius: 2px;
+         transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+         &:hover {
+            background-color: $main-color;
+            color: $white-color;
+         }
+      }
    }
 }

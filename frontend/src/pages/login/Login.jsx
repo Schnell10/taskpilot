@@ -84,6 +84,13 @@ const Login = () => {
    const token = sessionStorage.getItem('token')
    const navigate = useNavigate()
 
+   const combinedSubmit = async (event) => {
+      event.preventDefault()
+
+      await handleCreateAccount(event)
+      await handleSubmit(event)
+   }
+
    // Si le token est existe, redirigez vers la page home
    return token !== null ? (
       <Navigate to="/" replace={true} />
@@ -93,9 +100,7 @@ const Login = () => {
          <h2>{showCreateAccount ? 'Create an Account' : 'Login'}</h2>
 
          {/* Formulaire de connexion ou de création de compte */}
-         <form
-            onSubmit={showCreateAccount ? handleCreateAccount : handleSubmit}
-         >
+         <form onSubmit={showCreateAccount ? combinedSubmit : handleSubmit}>
             <label>
                Email:
                {/* Champ de saisie pour l'email avec gestion de l'état */}

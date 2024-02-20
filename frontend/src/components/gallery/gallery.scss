@@ -7,14 +7,14 @@
    border-radius: 25px;
    display: grid;
    grid-template-columns: 1fr 1fr;
-   margin: 30px 70px;
+   margin: 5px 70px 30px 70px;
    padding: 20px;
+   min-height: 150px;
+}
 
-   figure {
-      transition: transform 300ms;
-   }
-
-   figure:hover {
+.gallery-modal-close .figure-gallery {
+   transition: transform 300ms;
+   &:hover {
       transform: scale(1.01);
    }
 }

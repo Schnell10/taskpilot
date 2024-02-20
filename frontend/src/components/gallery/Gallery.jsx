@@ -1,19 +1,31 @@
 import React from 'react'
-import './gallery.scss'
 import Card from './card/Card'
+import './gallery.scss'
 
-const Gallery = ({ handleCheckboxChange, handleDeleteTask, tasks }) => {
-   // Rendu du composant
+const Gallery = ({
+   handleCheckboxChange,
+   handleDeleteTask,
+   tasks,
+   handleTaskAdded,
+   showModifyTaskModal,
+   setShowModifyTaskModal,
+}) => {
    return (
-      <div className="gallery">
+      <div
+         className={`gallery ${
+            showModifyTaskModal ? '' : 'gallery-modal-close'
+         }`}
+      >
          {tasks.map((task) => (
-            <figure key={task._id}>
+            <figure className="figure-gallery" key={task._id}>
                <Card
                   handleCheckboxChange={handleCheckboxChange}
                   handleDeleteTask={handleDeleteTask}
                   task={task}
+                  handleTaskAdded={handleTaskAdded}
+                  showModifyTaskModal={showModifyTaskModal}
+                  setShowModifyTaskModal={setShowModifyTaskModal}
                />
-               {/* On fait passer les props au composant Card*/}
             </figure>
          ))}
       </div>

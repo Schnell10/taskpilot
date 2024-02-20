@@ -11,6 +11,12 @@ h3,
 p,
 button,
 input,
-label {
+label,
+select,
+option {
    color: $text-color;
+}
+
+button:hover {
+   cursor: pointer;
 }
