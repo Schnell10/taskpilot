@@ -1,15 +1,5 @@
 @import '../../styles/variables.scss';
-
-.add-task {
-   width: 80px;
-   border-radius: 2px;
-   border: 1px solid $main-color;
-
-   &:hover {
-      background-color: $main-color;
-      color: $white-color;
-   }
-}
+@import '../../styles/mixin.scss';
 
 .modify-task {
    display: block;
@@ -34,14 +24,28 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       position: relative;
       width: 400px;
+      margin: 0 20px;
+
+      @include mobile() {
+         padding: 15px;
+      }
 
       h2 {
          margin-bottom: 20px;
+
+         @include mobile() {
+            margin-bottom: 15px;
+            font-size: 20px;
+         }
       }
 
       label {
          display: block;
          margin-bottom: 10px;
+
+         @include mobile() {
+            font-size: 12px;
+         }
 
          input,
          textarea {
@@ -49,6 +53,18 @@
             padding: 8px;
             margin-top: 5px;
             box-sizing: border-box;
+         }
+
+         input {
+            @include mobile() {
+               height: 20px;
+            }
+         }
+
+         textarea {
+            @include mobile() {
+               height: 40px;
+            }
          }
 
          .error {
@@ -59,6 +75,10 @@
 
          select {
             margin-left: 15px;
+
+            @include mobile() {
+               font-size: 12px;
+            }
 
             &:hover {
                cursor: pointer;
@@ -75,6 +95,10 @@
          cursor: pointer;
          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
+         @include mobile() {
+            font-size: 12px;
+         }
+
          &:disabled {
             background-color: $white-color;
             cursor: not-allowed;
@@ -87,7 +111,18 @@
          top: 10px;
          right: 10px;
          cursor: pointer;
-         font-size: 20px;
+         font-size: 35px;
+         opacity: 0.8;
+         transition: color 0.2s ease-out, transform 0.2s ease-out;
+
+         @include mobile() {
+            font-size: 28px;
+         }
+
+         &:hover {
+            color: $red-color; // Couleur rouge plus foncée au survol
+            transform: scale(1.1); // Faire grossir l'icône au survol
+         }
       }
    }
 }

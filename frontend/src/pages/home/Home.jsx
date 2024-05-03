@@ -11,13 +11,20 @@ const Home = () => {
    const [showToDoTasks, setShowToDoTasks] = useState(false)
    const [showAddTaskModal, setShowAddTaskModal] = useState(false)
    const [showModifyTaskModal, setShowModifyTaskModal] = useState(false)
+   const [taskToModify, setTaskToModify] = useState(null)
 
    const token = sessionStorage.getItem('token')
+
+   const handleModifyTask = (taskId) => {
+      const taskToModify = tasks.find((task) => task._id === taskId)
+      setShowModifyTaskModal(true)
+      setTaskToModify(taskToModify)
+   }
 
    const handleCheckboxChange = async (taskId, newStatus) => {
       try {
          const response = await fetch(
-            `http://localhost:3000/api/task/modifyDo/${taskId}`,
+            `http://localhost:4000/api/task/modifyDo/${taskId}`,
             {
                method: 'PUT',
                headers: {
@@ -46,7 +53,7 @@ const Home = () => {
    const handleDeleteTask = async (taskId) => {
       try {
          const response = await fetch(
-            `http://localhost:3000/api/task/${taskId}`,
+            `http://localhost:4000/api/task/${taskId}`,
             {
                method: 'DELETE',
                headers: {
@@ -74,7 +81,7 @@ const Home = () => {
       console.log(showToDoTasks)
       // Effectuez la requête fetch pour récupérer les tâches
       try {
-         const response = await fetch('http://localhost:3000/api/task', {
+         const response = await fetch('http://localhost:4000/api/task', {
             method: 'GET',
             headers: {
                'Content-Type': 'application/json',
@@ -138,7 +145,15 @@ const Home = () => {
                setShowToDoTasks={setShowToDoTasks}
                showToDoTasks={showToDoTasks}
             />
-            <div className="button-add-task">
+            <div>
+               <button
+                  className="button-add-task"
+                  onClick={() => setShowAddTaskModal(true)}
+               >
+                  {' '}
+                  Add Task{' '}
+               </button>
+
                <TaskFormModal
                   onTaskAdded={handleTaskAdded}
                   showAddTaskModal={showAddTaskModal}
@@ -155,6 +170,8 @@ const Home = () => {
             handleTaskAdded={handleTaskAdded}
             showModifyTaskModal={showModifyTaskModal}
             setShowModifyTaskModal={setShowModifyTaskModal}
+            handleModifyTask={handleModifyTask}
+            taskToModify={taskToModify}
          />
       </div>
    )

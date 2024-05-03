@@ -11,18 +11,23 @@ const Card = ({
    handleTaskAdded,
    showModifyTaskModal,
    setShowModifyTaskModal,
+   handleModifyTask,
+   taskToModify,
 }) => {
    return (
       <div className={`card ${showModifyTaskModal ? 'card-modal-open' : ''}`}>
          <div className="modify-delet">
+            <button onClick={() => handleModifyTask(task._id)}>
+               <FontAwesomeIcon icon={faPen} />
+            </button>
             <TaskFormModal
                onTaskAdded={handleTaskAdded}
                task={task}
                showModifyTaskModal={showModifyTaskModal}
                setShowModifyTaskModal={setShowModifyTaskModal}
-            >
-               <FontAwesomeIcon icon={faPen} />
-            </TaskFormModal>
+               taskToModify={taskToModify}
+            />
+
             <button onClick={() => handleDeleteTask(task._id)}>
                <FontAwesomeIcon icon={faTrash} />
             </button>

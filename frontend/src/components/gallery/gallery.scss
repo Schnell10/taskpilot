@@ -1,15 +1,24 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
 
 .gallery {
    grid-column-gap: 20px;
    grid-row-gap: 20px;
    background-color: $grey-color;
-   border-radius: 25px;
+   border-radius: 23px;
    display: grid;
-   grid-template-columns: 1fr 1fr;
-   margin: 5px 70px 30px 70px;
+   grid-template-columns: 1fr 1fr 1fr;
+   box-sizing: border-box;
    padding: 20px;
    min-height: 150px;
+   width: 100%;
+
+   @include mobile() {
+      padding: 14px;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 15px;
+      grid-row-gap: 15px;
+   }
 }
 
 .gallery-modal-close .figure-gallery {

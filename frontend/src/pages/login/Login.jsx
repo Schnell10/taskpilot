@@ -11,6 +11,9 @@ const Login = () => {
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
 
+   // State pour gérer les messages d'erreur
+   const [error, setError] = useState('')
+
    // Fonction pour basculer entre le formulaire de connexion et de création de compte
    const toggleCreateAccount = () => {
       setShowCreateAccount(!showCreateAccount)
@@ -22,7 +25,7 @@ const Login = () => {
 
       try {
          // Appel API pour la connexion
-         const response = await fetch('http://localhost:3000/api/auth/login', {
+         const response = await fetch('http://localhost:4000/api/auth/login', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -36,19 +39,25 @@ const Login = () => {
 
          // Vérifier si la réponse est OK
          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`)
+            const errorData = await response.json()
+            const errorMessage =
+               errorData.message || 'An error occurred. Please try again later.'
+            setError(errorMessage)
+            return
          }
 
          // Traitement de la réponse
          const data = await response.json()
-         if (data.token === undefined || data.token === null) {
-            console.log('Error: Invalid token.')
+         if (!data.token) {
+            setError('Invalid email or password. Please try again.')
+            return // Arrêter ici si les identifiants sont incorrects
          }
+
          sessionStorage.setItem('token', data.token)
          navigate('/')
       } catch (error) {
+         setError('An error occurred. Please try again later.')
          console.error('Error:', error.message)
-         console.log(document.cookie)
       }
    }
 
@@ -58,7 +67,7 @@ const Login = () => {
 
       try {
          // Appel API pour la création de compte
-         const response = await fetch('http://localhost:3000/api/auth/signup', {
+         const response = await fetch('http://localhost:4000/api/auth/signup', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -75,15 +84,17 @@ const Login = () => {
          }
 
          // Vous pouvez traiter la réponse ou rediriger l'utilisateur après la création du compte
-         console.log('compte ajouté avec succé')
+         console.log('compte ajouté avec succès')
       } catch (error) {
+         setError('An error occurred. Please try again later.')
          console.error('Error:', error.message)
       }
    }
 
-   const token = sessionStorage.getItem('token')
+   // Initialiser le hook `useNavigate`
    const navigate = useNavigate()
 
+   // Fonction pour traiter la soumission combinée
    const combinedSubmit = async (event) => {
       event.preventDefault()
 
@@ -91,10 +102,18 @@ const Login = () => {
       await handleSubmit(event)
    }
 
-   // Si le token est existe, redirigez vers la page home
-   return token !== null ? (
-      <Navigate to="/" replace={true} />
-   ) : (
+   const resetError = () => {
+      setError('')
+   }
+
+   // Si le token existe, redirigez vers la page home
+   const token = sessionStorage.getItem('token')
+   if (token !== null) {
+      return <Navigate to="/" replace={true} />
+   }
+
+   // Rendu du composant
+   return (
       <div className="login-page">
          {/* Titre dynamique en fonction du formulaire actuellement affiché */}
          <h2>{showCreateAccount ? 'Create an Account' : 'Login'}</h2>
@@ -109,6 +128,7 @@ const Login = () => {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onClick={resetError}
                />
             </label>
             <label>
@@ -119,16 +139,23 @@ const Login = () => {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onClick={resetError}
                />
             </label>
             {/* Bouton pour soumettre le formulaire (connexion ou création de compte) */}
-            <button type="submit">
+            <button
+               type="submit"
+               disabled={!email || !password || password.length < 8}
+            >
                {showCreateAccount ? 'Create Account' : 'Login'}
             </button>
          </form>
 
+         {/* Afficher le message d'erreur s'il y en a un */}
+         {error && <p className="error-message">{error}</p>}
+
          {/* Bouton pour afficher/cacher le formulaire de création de compte */}
-         <button onClick={toggleCreateAccount}>
+         <button className="create-account" onClick={toggleCreateAccount}>
             {showCreateAccount ? 'Back to Login' : 'Create an Account'}
          </button>
       </div>

@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
          </header>
          <div className="main-content">{children}</div>
          <footer>
-            <p>© 2023 Pierre Schnell</p>
+            <p>© 2024 Pierre Schnell</p>
          </footer>
       </div>
    )

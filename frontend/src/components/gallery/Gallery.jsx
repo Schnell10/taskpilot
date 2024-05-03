@@ -9,6 +9,8 @@ const Gallery = ({
    handleTaskAdded,
    showModifyTaskModal,
    setShowModifyTaskModal,
+   handleModifyTask,
+   taskToModify,
 }) => {
    return (
       <div
@@ -25,6 +27,8 @@ const Gallery = ({
                   handleTaskAdded={handleTaskAdded}
                   showModifyTaskModal={showModifyTaskModal}
                   setShowModifyTaskModal={setShowModifyTaskModal}
+                  handleModifyTask={handleModifyTask}
+                  taskToModify={taskToModify}
                />
             </figure>
          ))}

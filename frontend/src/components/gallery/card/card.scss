@@ -1,4 +1,5 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixin.scss';
 
 .card {
    border: none;
@@ -13,6 +14,14 @@
    align-items: center;
    gap: 8px;
    padding-bottom: 20px;
+   width: 100%;
+   box-sizing: border-box;
+
+   @include mobile() {
+      gap: 5px;
+      padding: 5px;
+      padding-bottom: 15px;
+   }
 
    button {
       border: none;
@@ -37,6 +46,10 @@
       .fa-pen {
          font-size: 16px;
          transition: color 0.3s ease-out, transform 0.3s ease-out;
+
+         @include mobile() {
+            font-size: 13px;
+         }
       }
    }
 
@@ -59,51 +72,83 @@
       color: $main-color;
       font-size: 24px;
       margin-bottom: 5px;
+
+      @include mobile() {
+         font-size: 18px;
+      }
    }
 
    .category-date {
       display: flex;
-      gap: 5px;
+      gap: 8px;
       width: 100%;
       justify-content: space-around;
       font-weight: 700;
       opacity: 0.9;
+
+      @include mobile() {
+         font-size: 13px;
+      }
+
       .Private {
          font-style: italic;
-         padding: 5px;
+         padding: 8px;
          color: $white-color;
          background-color: $blue-color;
          border-radius: 4px;
+
+         @include mobile() {
+            padding: 5px;
+         }
       }
 
       .Work {
          font-style: italic;
-         padding: 5px;
+         padding: 8px;
          color: $white-color;
          background-color: $red-color;
          border-radius: 4px;
+
+         @include mobile() {
+            padding: 5px;
+         }
       }
 
       .School {
          font-style: italic;
-         padding: 5px;
+         padding: 8px;
          color: $white-color;
          background-color: $green-color;
          border-radius: 4px;
+
+         @include mobile() {
+            padding: 5px;
+         }
       }
 
       .date {
          font-size: 14px;
+
+         @include mobile() {
+            font-size: 12px;
+         }
       }
    }
 
    .description {
       font-size: 12px;
-      overflow: hidden;
+      max-width: 300px; /* Remplacez 300px par la valeur que vous souhaitez */
+      word-wrap: break-word;
       text-align: center;
       opacity: 0.8;
       display: flex;
       justify-content: center;
+      margin-top: 5px;
+      word-break: break-word;
+
+      @include mobile() {
+         font-size: 10.5px;
+      }
    }
 
    .label-checkbox {

@@ -15,7 +15,7 @@ const normalizePort = (val) => {
    return false
 }
 // On configure le serveur pour qu'il écoute sur le port spécifié dans la variable d'environnement ou le port 4000
-const port = normalizePort(process.env.PORT || '3000')
+const port = normalizePort(process.env.PORT || '4000')
 app.set('port', port)
 
 //On attrape les différentes erreurs afin de les gèrer de manière appropriée

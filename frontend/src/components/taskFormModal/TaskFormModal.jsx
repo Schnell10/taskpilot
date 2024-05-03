@@ -3,8 +3,7 @@ import './taskFormModal.scss'
 
 const TaskFormModal = ({
    onTaskAdded,
-   task,
-   children,
+   taskToModify,
    showAddTaskModal,
    setShowAddTaskModal,
    showModifyTaskModal,
@@ -17,15 +16,15 @@ const TaskFormModal = ({
    })
 
    useEffect(() => {
-      // Si une tâche est sélectionnée, mettez à jour les données de la tâche
-      if (task) {
+      // Si une tâche est sélectionnée, remplissez les champs avec les données de la tâche
+      if (taskToModify) {
          setTaskData({
-            taskName: task.taskName,
-            category: task.category,
-            description: task.description,
+            taskName: taskToModify.taskName,
+            category: taskToModify.category,
+            description: taskToModify.description,
          })
       }
-   }, [task])
+   }, [taskToModify])
 
    const handleInputChange = (e) => {
       const { name, value } = e.target
@@ -43,11 +42,11 @@ const TaskFormModal = ({
       e.preventDefault()
       try {
          if (isFormValid) {
-            const apiUrl = task
-               ? `http://localhost:3000/api/task/modifyTask/${task._id}`
-               : 'http://localhost:3000/api/task'
+            const apiUrl = taskToModify
+               ? `http://localhost:4000/api/task/modifyTask/${taskToModify._id}`
+               : 'http://localhost:4000/api/task'
 
-            const requestMethod = task ? 'PUT' : 'POST'
+            const requestMethod = taskToModify ? 'PUT' : 'POST'
 
             const headers = {
                'Content-Type': 'application/json',
@@ -68,7 +67,7 @@ const TaskFormModal = ({
                   category: '',
                   description: '',
                })
-               if (task) {
+               if (taskToModify) {
                   setShowModifyTaskModal(false)
                } else {
                   setShowAddTaskModal(false)
@@ -77,7 +76,7 @@ const TaskFormModal = ({
             } else {
                const errorResponse = await response.json()
                console.error(
-                  `Error ${task ? 'modifying' : 'adding'} task:`,
+                  `Error ${taskToModify ? 'modifying' : 'adding'} task:`,
                   response.status,
                   errorResponse
                )
@@ -90,19 +89,11 @@ const TaskFormModal = ({
 
    return (
       <>
-         <button
-            onClick={() =>
-               task ? setShowModifyTaskModal(true) : setShowAddTaskModal(true)
-            }
-         >
-            {children}
-         </button>
-
          {(showAddTaskModal || showModifyTaskModal) && (
             <div
                className="modal-overlay"
                onClick={() =>
-                  task
+                  taskToModify
                      ? setShowModifyTaskModal(false)
                      : setShowAddTaskModal(false)
                }
@@ -111,14 +102,14 @@ const TaskFormModal = ({
                   <span
                      className="close"
                      onClick={() =>
-                        task
+                        taskToModify
                            ? setShowModifyTaskModal(false)
                            : setShowAddTaskModal(false)
                      }
                   >
                      &times;
                   </span>
-                  <h2>{task ? 'Modify Task' : 'Add Task'}</h2>
+                  <h2>{taskToModify ? 'Modify Task' : 'Add Task'}</h2>
                   <form onSubmit={handleFormSubmit}>
                      <label htmlFor="taskName">
                         Task Name:
@@ -128,6 +119,7 @@ const TaskFormModal = ({
                            value={taskData.taskName}
                            onChange={handleInputChange}
                            id="taskName"
+                           maxLength={20}
                         />
                      </label>
                      <label htmlFor="category">
