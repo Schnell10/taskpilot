@@ -14,7 +14,7 @@
       flex-direction: column;
       gap: 20px;
       align-items: center;
-      margin: 0 30px 5px 30px;
+      margin: 0 30px 30px 30px;
 
       @include mobile() {
          gap: 10px;
@@ -38,6 +38,7 @@
          border: 1px solid $main-color;
          border-radius: 3px;
          transition: background-color 0.2s ease-out, color 0.2s ease-out;
+         margin-top: 10px;
 
          &:hover {
             background-color: $main-color;

@@ -48,7 +48,7 @@ exports.modifyDo = (req, res, next) => {
          } else {
             task.do = req.body.do
 
-            // Enregistrez les modifications apportées à la tâche
+            // On enregistre les modifications apportées à la tâche
             return task.save()
          }
       })

@@ -79,13 +79,13 @@ const Home = () => {
 
    const fetchTasks = async () => {
       console.log(showToDoTasks)
-      // Effectuez la requête fetch pour récupérer les tâches
+      // Requête fetch pour récupérer les tâches
       try {
          const response = await fetch('http://localhost:4000/api/task', {
             method: 'GET',
             headers: {
                'Content-Type': 'application/json',
-               Authorization: `Bearer ${token}`, // Inclure le token JWT dans l'en-tête
+               Authorization: `Bearer ${token}`,
             },
          })
          if (response.ok) {
@@ -96,7 +96,7 @@ const Home = () => {
                ? data.filter((task) => task.do)
                : data.filter((task) => !task.do)
 
-            // Formatez la date dans chaque tâche avant de mettre à jour l'état
+            // Formate la date dans chaque tâche avant de mettre à jour l'état
             const formattedData = dataFilter.map((task) => {
                if (task.createdAt) {
                   const formattedCreatedAt = new Date(
@@ -122,7 +122,7 @@ const Home = () => {
       }
    }
    useEffect(() => {
-      fetchTasks() // Appeler fetchTasks() lors du montage du composant
+      fetchTasks() // Appel fetchTasks() lors du montage du composant
    }, [showToDoTasks])
 
    // Fonction pour mettre à jour les tâches après l'ajout réussi d'une nouvelle tâche
@@ -130,14 +130,14 @@ const Home = () => {
       fetchTasks()
    }
 
-   // Vérifiez si le token n'existe pas
+   // Vérifie si le token n'existe pas
    const isTokenMissing = sessionStorage.getItem('token') === null
 
-   // Si le token est manquant, redirigez vers la page de connexion
+   // Si le token est manquant, redirrection vers la page de connexion
    return isTokenMissing ? (
       <Navigate to="/login" replace={true} />
    ) : (
-      // Affichez la liste de tâches si le token est présent
+      // Affiche la liste de tâches si le token est présent
       <div className="home-page">
          <div className="title-filter">
             <h2>My Tasks</h2>

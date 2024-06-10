@@ -35,9 +35,8 @@ const Login = () => {
                password,
             }),
          })
-         console.log('Response:', response)
 
-         // Vérifier si la réponse est OK
+         // Vérifie si la réponse est OK
          if (!response.ok) {
             const errorData = await response.json()
             const errorMessage =
@@ -50,7 +49,7 @@ const Login = () => {
          const data = await response.json()
          if (!data.token) {
             setError('Invalid email or password. Please try again.')
-            return // Arrêter ici si les identifiants sont incorrects
+            return // Arrêt ici si les identifiants sont incorrects
          }
 
          sessionStorage.setItem('token', data.token)
@@ -78,12 +77,12 @@ const Login = () => {
             }),
          })
 
-         // Vérifier si la réponse est OK
+         // Vérifie si la réponse est OK
          if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`)
          }
 
-         // Vous pouvez traiter la réponse ou rediriger l'utilisateur après la création du compte
+         // On traite la réponse ou redirige l'utilisateur après la création du compte
          console.log('compte ajouté avec succès')
       } catch (error) {
          setError('An error occurred. Please try again later.')
@@ -106,7 +105,7 @@ const Login = () => {
       setError('')
    }
 
-   // Si le token existe, redirigez vers la page home
+   // Si le token existe, on se redirige vers la page home
    const token = sessionStorage.getItem('token')
    if (token !== null) {
       return <Navigate to="/" replace={true} />
@@ -115,14 +114,11 @@ const Login = () => {
    // Rendu du composant
    return (
       <div className="login-page">
-         {/* Titre dynamique en fonction du formulaire actuellement affiché */}
          <h2>{showCreateAccount ? 'Create an Account' : 'Login'}</h2>
 
-         {/* Formulaire de connexion ou de création de compte */}
          <form onSubmit={showCreateAccount ? combinedSubmit : handleSubmit}>
             <label>
                Email:
-               {/* Champ de saisie pour l'email avec gestion de l'état */}
                <input
                   type="email"
                   placeholder="Enter your email"
@@ -133,7 +129,6 @@ const Login = () => {
             </label>
             <label>
                Password:
-               {/* Champ de saisie pour le mot de passe avec gestion de l'état */}
                <input
                   type="password"
                   placeholder="Enter your password"
@@ -142,7 +137,6 @@ const Login = () => {
                   onClick={resetError}
                />
             </label>
-            {/* Bouton pour soumettre le formulaire (connexion ou création de compte) */}
             <button
                type="submit"
                disabled={!email || !password || password.length < 8}
@@ -151,10 +145,8 @@ const Login = () => {
             </button>
          </form>
 
-         {/* Afficher le message d'erreur s'il y en a un */}
          {error && <p className="error-message">{error}</p>}
 
-         {/* Bouton pour afficher/cacher le formulaire de création de compte */}
          <button className="create-account" onClick={toggleCreateAccount}>
             {showCreateAccount ? 'Back to Login' : 'Create an Account'}
          </button>

@@ -16,7 +16,7 @@ const TaskFormModal = ({
    })
 
    useEffect(() => {
-      // Si une tâche est sélectionnée, remplissez les champs avec les données de la tâche
+      // Si une tâche est sélectionnée, on remplie les champs avec les données de la tâche
       if (taskToModify) {
          setTaskData({
             taskName: taskToModify.taskName,
