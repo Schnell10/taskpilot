@@ -26,7 +26,7 @@ const Login = () => {
       try {
          // Appel API pour la connexion
          const response = await fetch(
-            'https://taskpilot-backend.vercel.app/api/auth/login',
+            'https://taskpilot-backend-ay3wqwx4q-schnell10s-projects.vercel.app/api/auth/login',
             {
                method: 'POST',
                headers: {
@@ -71,7 +71,7 @@ const Login = () => {
       try {
          // Appel API pour la création de compte
          const response = await fetch(
-            'https://taskpilot-backend.vercel.app/api/auth/signup',
+            'https://taskpilot-backend-ay3wqwx4q-schnell10s-projects.vercel.app/api/auth/signup',
             {
                method: 'POST',
                headers: {
