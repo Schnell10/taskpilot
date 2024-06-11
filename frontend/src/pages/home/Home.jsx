@@ -24,7 +24,7 @@ const Home = () => {
    const handleCheckboxChange = async (taskId, newStatus) => {
       try {
          const response = await fetch(
-            `http://localhost:4000/api/task/modifyDo/${taskId}`,
+            `https://taskpilot-9qwm.onrender.com/api/task/modifyDo/${taskId}`,
             {
                method: 'PUT',
                headers: {
@@ -53,7 +53,7 @@ const Home = () => {
    const handleDeleteTask = async (taskId) => {
       try {
          const response = await fetch(
-            `http://localhost:4000/api/task/${taskId}`,
+            `https://taskpilot-9qwm.onrender.com/api/task/${taskId}`,
             {
                method: 'DELETE',
                headers: {
@@ -81,13 +81,16 @@ const Home = () => {
       console.log(showToDoTasks)
       // Requête fetch pour récupérer les tâches
       try {
-         const response = await fetch('http://localhost:4000/api/task', {
-            method: 'GET',
-            headers: {
-               'Content-Type': 'application/json',
-               Authorization: `Bearer ${token}`,
-            },
-         })
+         const response = await fetch(
+            'https://taskpilot-9qwm.onrender.com/api/task',
+            {
+               method: 'GET',
+               headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`,
+               },
+            }
+         )
          if (response.ok) {
             const data = await response.json()
 

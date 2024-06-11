@@ -25,16 +25,19 @@ const Login = () => {
 
       try {
          // Appel API pour la connexion
-         const response = await fetch('http://localhost:4000/api/auth/login', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-               email,
-               password,
-            }),
-         })
+         const response = await fetch(
+            'https://taskpilot-9qwm.onrender.com/api/auth/login',
+            {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({
+                  email,
+                  password,
+               }),
+            }
+         )
 
          // Vérifie si la réponse est OK
          if (!response.ok) {
@@ -66,16 +69,19 @@ const Login = () => {
 
       try {
          // Appel API pour la création de compte
-         const response = await fetch('http://localhost:4000/api/auth/signup', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-               email,
-               password,
-            }),
-         })
+         const response = await fetch(
+            'https://taskpilot-9qwm.onrender.com/api/auth/signup',
+            {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({
+                  email,
+                  password,
+               }),
+            }
+         )
 
          // Vérifie si la réponse est OK
          if (!response.ok) {
