@@ -26,3 +26,7 @@
 - Coordonner efficacement le développement frontend et backend pour assurer une intégration transparente
 - Concevoir et implémenter une structure de base de données efficace
 - Utiliser SASS pour améliorer la gestion du style CSS de l'application
+
+## Lien vers le site
+
+[Accédez au site ici](https://taskpilot-beta.vercel.app/)
