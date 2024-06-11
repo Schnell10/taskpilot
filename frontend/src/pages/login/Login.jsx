@@ -26,7 +26,7 @@ const Login = () => {
       try {
          // Appel API pour la connexion
          const response = await fetch(
-            'https://taskpilot-theta.vercel.app/api/auth/login',
+            'https://taskpilot-backend.vercel.app/api/auth/login',
             {
                method: 'POST',
                headers: {
@@ -58,8 +58,9 @@ const Login = () => {
          sessionStorage.setItem('token', data.token)
          navigate('/')
       } catch (error) {
+         console.error('An error occurred during API call:', error.message)
+         console.error('Stack trace:', error.stack)
          setError('An error occurred. Please try again later.')
-         console.error('Error:', error.message)
       }
    }
 
@@ -70,7 +71,7 @@ const Login = () => {
       try {
          // Appel API pour la création de compte
          const response = await fetch(
-            'https://taskpilot-theta.vercel.app/api/auth/signup',
+            'https://taskpilot-backend.vercel.app/api/auth/signup',
             {
                method: 'POST',
                headers: {

@@ -17,24 +17,7 @@ mongoose
 
 const app = express() //On crée une instance de l'application Express
 
-// Utilisation de Helmet comme middleware
-app.use(helmet())
-
-// Configuration du CORS pour autoriser les requêtes provenant du frontend hébergé sur Vercel
-app.use(
-   cors({
-      origin: 'https://taskpilot-theta.vercel.app',
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      allowedHeaders: [
-         'Origin',
-         'X-Requested-With',
-         'Content',
-         'Accept',
-         'Content-Type',
-         'Authorization',
-      ],
-   })
-)
+app.use(cors())
 
 // Utilisation d'express.json() au lieu de bodyParser
 //(extrait les données JSON de la demande entrante et les rend disponibles dans un format JavaScript)
