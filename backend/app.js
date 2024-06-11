@@ -1,5 +1,6 @@
 const express = require('express')
 const helmet = require('helmet')
+const cors = require('cors')
 
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/auth')
@@ -16,24 +17,24 @@ mongoose
 
 const app = express() //On crée une instance de l'application Express
 
-// Utilisation de Helmet comme middleware  (c'est une librairie JavaScript qui offre un ensemble de fonctions middleware pour renforcer la sécurité en ajoutant des en-têtes HTTP de sécurité)
-app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
+// Utilisation de Helmet comme middleware
+app.use(helmet())
 
-//On gère les en-têtes CORS
-app.use((req, res, next) => {
-   res.setHeader('Access-Control-Allow-Origin', '*') //n'importe quel domaine est autorisé à faire des requêtes vers ce serveur
-   res.setHeader(
-      //On définit les en-têtes HTTP autorisés dans une requête
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
-   )
-   res.setHeader(
-      // On définit les méthodes HTTP autorisées dans une requête
-      'Access-Control-Allow-Methods',
-      'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-   )
-   next()
-})
+// Configuration du CORS pour autoriser les requêtes provenant du frontend hébergé sur Vercel
+app.use(
+   cors({
+      origin: 'https://taskpilot-theta.vercel.app',
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: [
+         'Origin',
+         'X-Requested-With',
+         'Content',
+         'Accept',
+         'Content-Type',
+         'Authorization',
+      ],
+   })
+)
 
 // Utilisation d'express.json() au lieu de bodyParser
 //(extrait les données JSON de la demande entrante et les rend disponibles dans un format JavaScript)
